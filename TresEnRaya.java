@@ -22,7 +22,7 @@ public class TresEnRaya {
         Jugador jugadorActivo;
         boolean volverAjugar=false;
         do {
-
+            tablero.mostrar();
             do {
                 jugadorActivo=Jugadores[jugadorActivoIndice];
                 jugadorActivo.ponerFicha(tablero);
@@ -48,6 +48,7 @@ public class TresEnRaya {
             String respuesta=scanner.next();
             if (respuesta.equals("S")){
                 volverAjugar=true;
+                tablero.vaciar();
             }else if (respuesta.equals("N")){
                 volverAjugar=false;
             }else {
@@ -55,7 +56,6 @@ public class TresEnRaya {
             }
 
         }while (volverAjugar);
-
 
     }
 

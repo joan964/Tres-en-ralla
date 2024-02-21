@@ -2,7 +2,7 @@ package org.example;
 
 public class Tablero {
 
-    public static final int DIMENSION = 3;
+    public static final int DIMENSION = 2;
     private EstadoCasilla[][] casillas;
 
     public Tablero() {
@@ -17,7 +17,11 @@ public class Tablero {
     }
 
     public void mostrar() {
-        System.out.println(" | 1| 2| 3|");
+        System.out.print(" ");
+        for (int i = 0; i < DIMENSION; i++) {
+            System.out.print(i+1+" |");
+        }
+        System.out.println("");
         for (int i = 0; i < DIMENSION; i++) {
             System.out.print(i+1+"|");
             for (int j = 0; j < DIMENSION; j++) {
@@ -30,65 +34,60 @@ public class Tablero {
     //aux
     private boolean hayTresEnRaya(EstadoCasilla color) {
 
-//        for (int i = 0; i < DIMENSION; i++) {
-//            if (casillas[i][0] == color && casillas[i][1] == color && casillas[i][2] == color) {
-//                return true;
-//            }
-//        }
-//
-//        for (int j = 0; j < DIMENSION; j++) {
-//            if (casillas[0][j] == color && casillas[1][j] == color && casillas[2][j] == color) {
-//                return true;
-//            }
-//        }
-//
-//        if (casillas[0][0] == color && casillas[1][1] == color && casillas[2][2] == color) {
-//            return true;
-//        }
-//
-//        if (casillas[0][2] == color && casillas[1][1] == color && casillas[2][0] == color) {
-//            return true;
-//        }
+    //  for (int i = 0; i < DIMENSION; i++) {
+      //     if (casillas[i][0] == color && casillas[i][1] == color && casillas[i][2] == color) {
+        //      return true;
+         // }
+       //}
 
-//        EstadoCasilla [] comprobacion=new  EstadoCasilla[DIMENSION];
+       //for (int j = 0; j < DIMENSION; j++) {
+         //   if (casillas[0][j] == color && casillas[1][j] == color && casillas[2][j] == color) {
+           //     return true;
+           //}
+        //}
 
-        //fila
-        for (int i = 0; i <DIMENSION ; i++) {
-            for (int j = 0; j <DIMENSION ; j++) {
-            if(casillas[i][j]!=color){
-                return false;
-            }
+     // if (casillas[0][0] == color && casillas[1][1] == color && casillas[2][2] == color) {
+       //    return true;
+       //}
+
+       //if (casillas[0][2] == color && casillas[1][1] == color && casillas[2][0] == color) {
+         //  return true;
+       //}
+
+      //EstadoCasilla [] comprobacion=new  EstadoCasilla[DIMENSION];
+
+
+//        return true;
+
+        for (int i = 0; i < DIMENSION; i++) {
+            if (verificarLinea(i, 0, 0, 1, color) || verificarLinea(0, i, 1, 0, color)) {
+                return true;
             }
         }
 
-        //columna
-        for (int i = 0; i <DIMENSION ; i++) {
-            for (int j = 0; j <DIMENSION ; j++) {
-                if(casillas[j][i]!=color){
-                    return false;
+
+        if (verificarLinea(0, 0, 1, 1, color) || verificarLinea(0, DIMENSION - 1, 1, -1, color)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean verificarLinea(int uno, int dos, int aux, int aux2, EstadoCasilla color) {
+        int contador = 0;
+        for (int i = 0; i < DIMENSION; i++) {
+            if (casillas[uno][dos] == color) {
+                contador++;
+                if (contador == DIMENSION) {
+                    return true;
                 }
+            } else {
+                contador = 0;
             }
+            uno += aux;
+            dos += aux2;
         }
-
-        //diagonal primera
-        for (int i = 0; i <DIMENSION ; i++) {
-            for (int j = 0; j <DIMENSION ; j++) {
-                if(casillas[i][i]!=color){
-                    return false;
-                }
-            }
-        }
-
-        //diagonal invertida
-        for (int i = 0; i <DIMENSION ; i++) {
-            for (int j = DIMENSION; j ==0 ; j--) {
-                if(casillas[i][j]!=color){
-                    return false;
-                }
-            }
-        }
-
-        return true;
+        return false;
     }
 
     public boolean isOcupada(Coordenada coordenada) {

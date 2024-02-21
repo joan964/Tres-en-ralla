@@ -25,18 +25,18 @@ public class Jugador {
 
         do {
             System.out.println("Jugador con " + ficha);
-            System.out.print("Introduce fila [1-3]: ");
+            System.out.print("Introduce fila [1-"+Tablero.DIMENSION+"]: ");
             while (!scanner.hasNextInt()) {
                 System.out.println("¡Error! Debe introducir un número entero");
-                System.out.print("Introduce fila [1-3]: ");
+                System.out.print("Introduce fila [1-"+Tablero.DIMENSION+"]: ");
                 scanner.next();
             }
             fila = scanner.nextInt();
 
-            System.out.print("Introduce columna [1-3]: ");
+            System.out.print("Introduce columna [1-"+Tablero.DIMENSION+"]: ");
             while (!scanner.hasNextInt()) {
                 System.out.println("¡Error! Debe introducir un número entero");
-                System.out.print("Introduce columna [1-3]: ");
+                System.out.print("Introduce columna [1-"+Tablero.DIMENSION+"]: ");
                 scanner.next();
             }
             columna = scanner.nextInt();
